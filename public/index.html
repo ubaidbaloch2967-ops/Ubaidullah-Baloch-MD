@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ubaidullah-Baloch-MD | VIP PAIRING</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.85)), url('https://image2url.com/r2/default/images/1773132494378-437ae601-d8a1-4a78-b100-247726646b3d.png');
+            background-size: cover; background-position: center; font-family: 'Poppins', sans-serif;
+            min-height: 100vh; display: flex; align-items: center; justify-content: center;
+        }
+        .glass { background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(12px); border: 1px solid rgba(0, 119, 255, 0.4); }
+        .neon-text { text-shadow: 0 0 15px #0077ff; font-family: 'Orbitron', sans-serif; }
+    </style>
+</head>
+<body class="p-4">
+    <div class="glass p-8 rounded-3xl w-full max-w-md text-center shadow-2xl">
+        <h1 class="text-2xl font-bold mb-2 text-white neon-text uppercase tracking-widest">Ubaidullah-Baloch-MD</h1>
+        <p class="text-blue-300 text-xs mb-8">VIP PAIRING PORTAL</p>
+        <input type="number" id="number" placeholder="923702866763" class="w-full p-4 rounded-xl bg-black/50 border border-blue-500/30 text-white mb-6 text-center outline-none focus:border-blue-400">
+        <button onclick="generateCode()" id="btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl shadow-lg transition-all">GET PAIR CODE</button>
+        <div id="resBox" class="hidden mt-8 p-4 bg-blue-900/20 border border-blue-500 rounded-2xl animate-pulse">
+            <h2 id="pairCode" class="text-4xl font-bold text-white tracking-[8px] font-mono">------</h2>
+        </div>
+        <p class="mt-8 text-[10px] text-gray-500 italic">Developed by Ubaidullah Baloch</p>
+    </div>
+    <script>
+        async function generateCode() {
+            const num = document.getElementById('number').value;
+            if(!num) return alert("Number daalo Bhai!");
+            document.getElementById('btn').innerText = "Connecting...";
+            try {
+                const res = await fetch(`/api/pair?number=${num}`);
+                const data = await res.json();
+                document.getElementById('resBox').classList.remove('hidden');
+                document.getElementById('pairCode').innerText = data.code || "Error";
+                document.getElementById('btn').innerText = "CODE READY ✅";
+            } catch (e) { alert("Server Down!"); }
+        }
+    </script>
+</body>
+</html>
